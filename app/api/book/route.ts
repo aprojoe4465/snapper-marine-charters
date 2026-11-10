@@ -158,8 +158,8 @@ export async function POST(req: Request) {
     }
 
     const party = Number(partySize);
-    if (!Number.isInteger(party) || party < 1 || party > 20) {
-      return NextResponse.json({ error: "Party size must be between 1 and 20" }, { status: 400 });
+    if (!Number.isInteger(party) || party < 1 || party > 6) {
+      return NextResponse.json({ error: "Party size must be between 1 and 6" }, { status: 400 });
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {

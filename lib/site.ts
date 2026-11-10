@@ -25,7 +25,7 @@ export const site = {
     duration: "[Duration TBD]",
     marina: "[Marina TBD]",
     boat: "[Boat TBD]",
-    capacity: "[Capacity TBD]",
+    capacity: "Up to 6 guests",
     license: "[License TBD]",
     uscg: "[USCG credential TBD]",
     included: "[Included items TBD]",

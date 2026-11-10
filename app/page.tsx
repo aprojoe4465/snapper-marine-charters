@@ -135,8 +135,8 @@ export default function HomePage() {
             <details>
               <summary>How many people can come?</summary>
               <p>
-                Party capacity is {site.placeholders.capacity}. Tell us your group
-                size on the request form and we&apos;ll confirm whether the date works.
+                Trips take up to 6 passengers. Tell us your group size on the
+                request form and we&apos;ll confirm whether the date works.
               </p>
             </details>
             <details>

@@ -155,7 +155,7 @@ export default function BookingForm() {
             type="number"
             name="partySize"
             min={1}
-            max={20}
+            max={6}
             inputMode="numeric"
             value={form.partySize}
             onChange={(e) => update("partySize", e.target.value)}

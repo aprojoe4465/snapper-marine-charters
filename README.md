@@ -12,7 +12,7 @@ Do not invent these on the site. Edit `lib/site.ts` (`placeholders`) and `lib/tr
 - `[Duration TBD]`
 - `[Marina TBD]`
 - `[Boat TBD]`
-- `[Capacity TBD]`
+- Capacity is set: Up to 6 guests
 - `[License TBD]`
 - `[USCG credential TBD]`
 - `[Included items TBD]`
