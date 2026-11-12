@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { captainPhoto } from "@/lib/photos";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About Captain Joe",
-  description: `Meet ${site.captain}, captain of ${site.name} in ${site.city}. Fishing and sightseeing charters on the Treasure Coast.`,
+  description: `Meet ${site.captain}, captain of ${site.name} in ${site.city}. Fishing, sightseeing, and snorkel charters on the Treasure Coast.`,
 };
 
 export default function AboutPage() {
@@ -23,12 +24,14 @@ export default function AboutPage() {
 
       <section className="section">
         <div className="container about-grid">
-          <figure className="captain-badge">
+          <figure className="captain-photo">
             <Image
-              src="/captain-joe.png"
-              alt="Captain Joe Snapper Marine badge"
-              width={1280}
-              height={720}
+              src={captainPhoto.src}
+              alt={captainPhoto.alt}
+              width={captainPhoto.width}
+              height={captainPhoto.height}
+              sizes="(max-width: 860px) 100vw, 40vw"
+              priority
             />
           </figure>
           <div className="prose">
@@ -36,14 +39,16 @@ export default function AboutPage() {
             <p>
               {site.captainShort} is the owner of {site.legalName}, based in{" "}
               {site.city}. Through the {site.name} fictitious name, he offers
-              fishing charters and sightseeing or sandbar trips in{" "}
-              {site.serviceAreaSummary}.
+              fishing charters, sightseeing or sandbar trips, and snorkel or
+              spearfishing trips in {site.serviceAreaSummary}.
             </p>
             <p>
               Whether you want an inshore or nearshore fishing day, a sandbar
-              outing, or a sunset cruise, you&apos;ll work directly with{" "}
-              {site.captainShort} on the plan for your group.
+              outing, a sunset cruise, or time in the water, you&apos;ll work
+              directly with {site.captainShort} on the plan for your group.
             </p>
+            <h3>The boat</h3>
+            <p>{site.placeholders.boat}.</p>
             <h3>Credentials</h3>
             <p>
               Official credentials will be posted here once they are confirmed.

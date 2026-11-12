@@ -658,22 +658,6 @@ textarea {
   position: relative;
 }
 
-.hero-photo {
-  margin: 0;
-  border-radius: var(--radius);
-  overflow: hidden;
-  border: 1px solid var(--border);
-  background: #000;
-  box-shadow: 0 0 48px var(--blue-glow), 0 24px 48px rgba(0, 0, 0, 0.55);
-}
-
-.hero-photo-img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  aspect-ratio: 4 / 3;
-}
 
 
 .boat-gallery {
@@ -893,4 +877,231 @@ textarea {
 .placeholder-key {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 0.85em;
+}
+
+/* --- Photo hero, trip cards, gallery, lightbox --- */
+
+.hero-photo::before { display: none; }
+
+.hero-photo {
+  position: relative;
+  min-height: min(88vh, 820px);
+  display: flex;
+  align-items: flex-end;
+  padding: 7rem 0 4rem;
+  overflow: hidden;
+}
+
+.hero-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 72%;
+  z-index: 0;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(5, 5, 7, 0.82) 0%, rgba(5, 5, 7, 0.45) 46%, rgba(5, 5, 7, 0.18) 100%),
+    linear-gradient(180deg, rgba(5, 5, 7, 0.4) 0%, transparent 36%, rgba(5, 5, 7, 0.72) 100%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 40rem;
+}
+
+.hero-photo h1,
+.hero-photo .lead {
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55);
+}
+
+.hero-photo .lead {
+  color: #d5d9e2;
+}
+
+.trip-card {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.trip-card-photo {
+  background: #000;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.trip-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+.trip-card-body {
+  padding: 1.25rem 1.5rem 1.5rem;
+  display: grid;
+  gap: 0.15rem;
+}
+
+.trip-card-body .icon {
+  margin-bottom: 0.75rem;
+}
+
+.trip-card-body .btn {
+  margin-top: 1.1rem;
+  width: fit-content;
+}
+
+.captain-photo {
+  margin: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #000;
+  box-shadow: 0 0 40px var(--blue-glow);
+}
+
+.captain-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.gallery-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.gallery-item {
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+  cursor: pointer;
+  aspect-ratio: 4 / 3;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.gallery-item:hover,
+.gallery-item:focus-visible {
+  border-color: var(--blue);
+  box-shadow: 0 0 24px var(--blue-glow);
+  outline: none;
+}
+
+.gallery-item-small {
+  max-width: 100%;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3.5rem 3.5rem 2rem;
+}
+
+.lightbox-figure {
+  margin: 0;
+  max-width: min(1100px, 100%);
+  max-height: 100%;
+  text-align: center;
+}
+
+.lightbox-img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: min(80vh, 900px);
+  object-fit: contain;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
+.lightbox-figure figcaption {
+  color: var(--chrome);
+  font-size: 0.9rem;
+  margin-top: 0.85rem;
+}
+
+.lightbox-close,
+.lightbox-nav {
+  position: absolute;
+  background: rgba(18, 18, 24, 0.85);
+  border: 1px solid var(--border);
+  color: var(--chrome-bright);
+  cursor: pointer;
+  font: inherit;
+}
+
+.lightbox-close {
+  top: 1rem;
+  right: 1rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.lightbox-nav {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.lightbox-prev { left: 0.75rem; }
+.lightbox-next { right: 0.75rem; }
+
+.lightbox-close:hover,
+.lightbox-nav:hover {
+  border-color: var(--blue);
+  color: #fff;
+}
+
+@media (max-width: 640px) {
+  .hero-photo {
+    min-height: 70vh;
+    align-items: flex-end;
+    padding: 5.5rem 0 2.5rem;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .lightbox {
+    padding: 4rem 0.75rem 1.5rem;
+  }
+
+  .lightbox-nav {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
 }

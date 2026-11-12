@@ -11,7 +11,7 @@ Do not invent these on the site. Edit `lib/site.ts` (`placeholders`) and `lib/tr
 - `[Price TBD]`
 - `[Duration TBD]`
 - `[Marina TBD]`
-- `[Boat TBD]`
+- Boat is set: Contender center console with twin Honda 250 outboards
 - Capacity is set: Up to 6 guests
 - `[License TBD]`
 - `[USCG credential TBD]`

@@ -1,49 +1,49 @@
 import Image from "next/image";
 import Link from "next/link";
+import PhotoGallery from "@/components/PhotoGallery";
+import TripCard from "@/components/TripCard";
+import { galleryPhotos, heroPhoto } from "@/lib/photos";
 import { site } from "@/lib/site";
 import { trips } from "@/lib/trips";
 
 export default function HomePage() {
   return (
     <>
-      <section className="hero hero-with-photo">
-        <div className="container hero-grid">
-          <div>
-            <span className="eyebrow">Treasure Coast charters</span>
-            <h1>
-              Fishing and sightseeing trips with <span>Captain Joe</span>
-            </h1>
-            <p className="lead">
-              {site.name} offers inshore and nearshore fishing, plus sightseeing,
-              sandbar, and sunset cruises in {site.serviceAreaShort}. A sister
-              brand of{" "}
-              <a href={site.sisterBrand.url} rel="noopener noreferrer">
-                {site.sisterBrand.name}
-              </a>
-              , run by {site.captain}.
-            </p>
-            <div className="cta-row">
-              <Link href="/book" className="btn btn-primary">
-                Book a trip
-              </Link>
-              <a href={site.phoneHref} className="btn btn-chrome">
-                Call {site.phoneDisplay}
-              </a>
-              <Link href="/trips" className="btn btn-ghost">
-                View trips
-              </Link>
-            </div>
-          </div>
-          <div className="hero-visual">
-            <figure className="captain-badge">
-              <Image
-                src="/captain-joe.png"
-                alt='Captain Joe Snapper Marine badge'
-                width={1280}
-                height={720}
-                priority
-              />
-            </figure>
+      <section className="hero hero-photo">
+        <Image
+          src={heroPhoto.src}
+          alt={heroPhoto.alt}
+          width={heroPhoto.width}
+          height={heroPhoto.height}
+          priority
+          className="hero-bg-img"
+          sizes="100vw"
+        />
+        <div className="hero-overlay" aria-hidden />
+        <div className="container hero-content">
+          <span className="eyebrow">Treasure Coast charters</span>
+          <h1>
+            Fishing, sightseeing, and snorkel trips with <span>Captain Joe</span>
+          </h1>
+          <p className="lead">
+            {site.name} offers inshore and nearshore fishing, sightseeing,
+            sandbar, and sunset cruises, plus snorkel and spearfishing trips in{" "}
+            {site.serviceAreaShort}. A sister brand of{" "}
+            <a href={site.sisterBrand.url} rel="noopener noreferrer">
+              {site.sisterBrand.name}
+            </a>
+            , run by {site.captain}.
+          </p>
+          <div className="cta-row">
+            <Link href="/book" className="btn btn-primary">
+              Book a trip
+            </Link>
+            <a href={site.phoneHref} className="btn btn-chrome">
+              Call {site.phoneDisplay}
+            </a>
+            <Link href="/trips" className="btn btn-ghost">
+              View trips
+            </Link>
           </div>
         </div>
       </section>
@@ -53,34 +53,33 @@ export default function HomePage() {
           <div className="section-head">
             <h2>Choose your trip</h2>
             <p>
-              Fishing or a relaxed day on the water — request a date and we&apos;ll
-              follow up with availability, meeting details, and pricing.
+              Fishing, a relaxed day on the water, or time in the water —
+              request a date and we&apos;ll follow up with availability, meeting
+              details, and pricing.
             </p>
           </div>
           <div className="card-grid">
             {trips.map((trip) => (
-              <article className="card trip-card" key={trip.id} id={trip.id}>
-                <div className="icon">{trip.category === "fishing" ? "🎣" : "🌅"}</div>
-                <h3>{trip.name}</h3>
-                <p>{trip.summary}</p>
-                <div className="trip-meta">
-                  <span>Duration: {trip.duration}</span>
-                  <span>From: {trip.price}</span>
-                  <span>Capacity: {trip.capacity}</span>
-                </div>
-                <p>
-                  Departs: {trip.marina}. Boat: {trip.boat}.
-                </p>
-                <Link href={`/book?trip=${trip.id}`} className="btn btn-primary">
-                  Request this trip
-                </Link>
-              </article>
+              <TripCard key={trip.id} trip={trip} />
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section section-alt" id="what-to-bring">
+      <section className="section section-alt" id="gallery">
+        <div className="container">
+          <div className="section-head">
+            <h2>On the water</h2>
+            <p>
+              Photos from trips aboard the Contender — fishing, snorkeling,
+              spearfishing, and time on the Treasure Coast.
+            </p>
+          </div>
+          <PhotoGallery photos={galleryPhotos} />
+        </div>
+      </section>
+
+      <section className="section" id="what-to-bring">
         <div className="container">
           <div className="section-head">
             <h2>What to bring</h2>
@@ -108,6 +107,13 @@ export default function HomePage() {
               </p>
             </article>
             <article className="card">
+              <h3>Snorkel &amp; spearfishing</h3>
+              <p>
+                Guests bring or rent their own snorkel or spearfishing gear and
+                must follow FWC rules.
+              </p>
+            </article>
+            <article className="card">
               <h3>Owner notes</h3>
               <p>
                 Additional packing notes: <span className="placeholder-key">{site.placeholders.whatToBring}</span>
@@ -117,7 +123,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section" id="faq">
+      <section className="section section-alt" id="faq">
         <div className="container">
           <div className="section-head">
             <h2>Frequently asked questions</h2>
@@ -155,6 +161,14 @@ export default function HomePage() {
               </p>
             </details>
             <details>
+              <summary>Do you provide snorkel or spearfishing gear?</summary>
+              <p>
+                Guests bring or rent their own snorkel or spearfishing gear and
+                must follow Florida Fish and Wildlife Conservation Commission
+                (FWC) rules.
+              </p>
+            </details>
+            <details>
               <summary>Is Captain Joe licensed?</summary>
               <p>
                 License: {site.placeholders.license}. USCG credential:{" "}
@@ -185,7 +199,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section section-alt">
+      <section className="section">
         <div className="container">
           <div className="sister-banner">
             <span>
@@ -202,7 +216,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section section-alt">
         <div className="container">
           <div className="section-head">
             <h2>Ready to get on the water?</h2>

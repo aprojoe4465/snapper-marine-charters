@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import TripCard from "@/components/TripCard";
 import { site } from "@/lib/site";
 import { trips } from "@/lib/trips";
 
 export const metadata: Metadata = {
   title: "Trips",
-  description: `Inshore and nearshore fishing, sightseeing and sandbar trips, and sunset cruises with ${site.name} in ${site.serviceAreaShort}.`,
+  description: `Inshore and nearshore fishing, sightseeing and sandbar trips, sunset cruises, and snorkel or spearfishing with ${site.name} in ${site.serviceAreaShort}.`,
 };
 
 export default function TripsPage() {
@@ -14,11 +14,11 @@ export default function TripsPage() {
       <div className="page-hero">
         <div className="container">
           <span className="eyebrow">Charter trips</span>
-          <h1>Fishing and sightseeing</h1>
+          <h1>Fishing, sightseeing, and snorkel</h1>
           <p>
-            Choose a trip type and send a request. Durations, prices, the
-            departure marina, and the boat are listed as placeholders until we
-            confirm them with you.
+            Choose a trip type and send a request. Durations, prices, and the
+            departure marina are listed as placeholders until we confirm them
+            with you. Trips run on a {site.placeholders.boat}.
           </p>
         </div>
       </div>
@@ -27,27 +27,7 @@ export default function TripsPage() {
         <div className="container">
           <div className="card-grid">
             {trips.map((trip) => (
-              <article className="card trip-card" key={trip.id} id={trip.id}>
-                <div className="icon">{trip.category === "fishing" ? "🎣" : "🌅"}</div>
-                <h3>{trip.name}</h3>
-                <p>{trip.summary}</p>
-                <p>{trip.details}</p>
-                <div className="trip-meta">
-                  <span>Duration: {trip.duration}</span>
-                  <span>Price: {trip.price}</span>
-                  <span>Capacity: {trip.capacity}</span>
-                </div>
-                <p>
-                  Meeting place: {trip.marina}
-                  <br />
-                  Boat: {trip.boat}
-                  <br />
-                  Included: {trip.included}
-                </p>
-                <Link href={`/book?trip=${trip.id}`} className="btn btn-primary">
-                  Request this trip
-                </Link>
-              </article>
+              <TripCard key={trip.id} trip={trip} detailed />
             ))}
           </div>
         </div>

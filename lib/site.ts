@@ -24,7 +24,7 @@ export const site = {
     price: "[Price TBD]",
     duration: "[Duration TBD]",
     marina: "[Marina TBD]",
-    boat: "[Boat TBD]",
+    boat: "Contender center console with twin Honda 250 outboards",
     capacity: "Up to 6 guests",
     license: "[License TBD]",
     uscg: "[USCG credential TBD]",

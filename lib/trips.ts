@@ -3,7 +3,7 @@ import { site } from "@/lib/site";
 export type Trip = {
   id: string;
   name: string;
-  category: "fishing" | "sightseeing";
+  category: "fishing" | "sightseeing" | "snorkel";
   summary: string;
   details: string;
   duration: string;
@@ -15,9 +15,10 @@ export type Trip = {
 };
 
 /**
- * Trip catalog. Every duration, price, marina, boat, capacity, and inclusions
- * value is a clearly marked placeholder until the owner fills it in.
- * Edit this file (and lib/site.ts) — no other files need changing for those facts.
+ * Trip catalog. Duration, price, marina, and inclusions stay as
+ * clearly marked placeholders until the owner fills them in.
+ * The boat and capacity values are confirmed. Edit this file (and lib/site.ts)
+ * when those remaining facts are ready.
  */
 export const trips: Trip[] = [
   {
@@ -80,6 +81,21 @@ export const trips: Trip[] = [
     boat: site.placeholders.boat,
     included: site.placeholders.included,
   },
+  {
+    id: "snorkel-spearfishing",
+    name: "Snorkel & Spearfishing",
+    category: "snorkel",
+    summary:
+      "Get in the water for snorkeling or spearfishing with Captain Joe — a good fit if you want more than a ride on the boat.",
+    details:
+      "Guests bring or rent their own snorkel or spearfishing gear and must follow Florida Fish and Wildlife Conservation Commission (FWC) rules. We'll confirm the plan, meeting place, and other details when we book.",
+    duration: site.placeholders.duration,
+    price: site.placeholders.price,
+    capacity: site.placeholders.capacity,
+    marina: site.placeholders.marina,
+    boat: site.placeholders.boat,
+    included: site.placeholders.included,
+  },
 ];
 
 export const tripTypeOptions = [
@@ -89,4 +105,10 @@ export const tripTypeOptions = [
 
 export function tripById(id: string): Trip | undefined {
   return trips.find((trip) => trip.id === id);
+}
+
+export function tripIcon(category: Trip["category"]): string {
+  if (category === "fishing") return "🎣";
+  if (category === "snorkel") return "🤿";
+  return "🌅";
 }
