@@ -11,7 +11,7 @@ export const heroPhoto: Photo = {
   src: "/photos/hero-bow-blue-lights-dusk.webp",
   width: 1600,
   height: 1200,
-  alt: "Blue LED lights in the bow of a Contender center console at dusk on the Intracoastal Waterway",
+  alt: "Blue LED lights in the bow of Deep Blue Hunter, a Contender center console, at dusk on the Intracoastal Waterway",
 };
 
 export const captainPhoto: Photo = {
@@ -28,7 +28,7 @@ export const tripPhotos: Record<string, Photo> = {
     src: "/photos/inshore-contender-honda-wake.webp",
     width: 1600,
     height: 1200,
-    alt: "Wake behind a Contender center console with twin Honda 250 outboards on the river",
+    alt: "Wake behind Deep Blue Hunter, a Contender center console with twin Honda 250 outboards, on the river",
   },
   "nearshore-fishing": {
     id: "nearshore",
@@ -49,7 +49,7 @@ export const tripPhotos: Record<string, Photo> = {
     src: "/photos/sunrise-from-the-bow.webp",
     width: 1600,
     height: 1200,
-    alt: "Sunrise over the ocean from the bow of the charter boat",
+    alt: "Sunrise over the ocean from the bow of Deep Blue Hunter",
   },
   "snorkel-spearfishing": {
     id: "spearfishing",
@@ -66,7 +66,7 @@ export const galleryPhotos: Photo[] = [
     src: "/photos/sunrise-from-the-bow-2.webp",
     width: 1600,
     height: 1200,
-    alt: "Sunrise over open water from the bow of the Contender",
+    alt: "Sunrise over open water from the bow of Deep Blue Hunter",
   },
   {
     id: "spearfisher-stern",

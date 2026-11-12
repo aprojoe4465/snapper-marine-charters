@@ -10,11 +10,12 @@ export const metadata: Metadata = {
     template: `%s | ${site.shortName}`,
   },
   description:
-    `${site.name} offers fishing charters and sightseeing or sandbar trips in ${site.serviceAreaSummary}. Book a trip with ${site.captainShort}.`,
+    `${site.name} offers fishing, sightseeing, and snorkel charters in ${site.serviceAreaSummary} aboard ${site.boatName}. Book a trip with ${site.captainShort}.`,
   metadataBase: new URL(`https://${site.domain}`),
   keywords: [
     "Snapper Marine Charters",
     "Captain Joe",
+    "Deep Blue Hunter",
     "fishing charter Treasure Coast",
     "Port St. Lucie fishing charter",
     "Stuart fishing charter",
@@ -56,6 +57,41 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "LocalBusiness",
+                  name: site.name,
+                  legalName: site.legalName,
+                  url: `https://${site.domain}`,
+                  email: site.email,
+                  description: `${site.name} offers fishing, sightseeing, and snorkel charters in ${site.serviceAreaSummary} aboard ${site.boatName}, a Contender center console with twin Honda 250 outboards.`,
+                  address: {
+                    "@type": "PostalAddress",
+                    addressLocality: "Port St. Lucie",
+                    addressRegion: "FL",
+                    addressCountry: "US",
+                  },
+                  employee: {
+                    "@type": "Person",
+                    name: site.captain,
+                    jobTitle: "Captain",
+                  },
+                },
+                {
+                  "@type": "Boat",
+                  name: site.boatName,
+                  description:
+                    "Contender center console with twin Honda 250 outboards",
+                },
+              ],
+            }),
+          }}
+        />
       </body>
     </html>
   );

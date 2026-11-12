@@ -32,7 +32,7 @@ export default function HomePage() {
             <a href={site.sisterBrand.url} rel="noopener noreferrer">
               {site.sisterBrand.name}
             </a>
-            , run by {site.captain}.
+            , run by {site.captain} aboard {site.boatName}.
           </p>
           <div className="cta-row">
             <Link href="/book" className="btn btn-primary">
@@ -71,7 +71,7 @@ export default function HomePage() {
           <div className="section-head">
             <h2>On the water</h2>
             <p>
-              Photos from trips aboard the Contender — fishing, snorkeling,
+              Photos from trips aboard {site.boatName} — fishing, snorkeling,
               spearfishing, and time on the Treasure Coast.
             </p>
           </div>
@@ -156,8 +156,9 @@ export default function HomePage() {
             <details>
               <summary>What boat will we be on?</summary>
               <p>
-                The charter boat is {site.placeholders.boat}. We&apos;ll share the
-                specifics when we confirm your reservation.
+                You&apos;ll be on {site.boatName}, our Contender center console
+                with twin Honda 250 outboards. We&apos;ll share the specifics
+                when we confirm your reservation.
               </p>
             </details>
             <details>

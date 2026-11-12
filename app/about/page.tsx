@@ -6,7 +6,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About Captain Joe",
-  description: `Meet ${site.captain}, captain of ${site.name} in ${site.city}. Fishing, sightseeing, and snorkel charters on the Treasure Coast.`,
+  description: `Meet ${site.captain}, captain of ${site.name} in ${site.city}. Trips run aboard ${site.boatName}, a Contender center console with twin Honda 250 outboards.`,
 };
 
 export default function AboutPage() {
@@ -48,7 +48,10 @@ export default function AboutPage() {
               directly with {site.captainShort} on the plan for your group.
             </p>
             <h3>The boat</h3>
-            <p>{site.placeholders.boat}.</p>
+            <p>
+              Meet {site.boatName}, our Contender center console with twin Honda
+              250 outboards.
+            </p>
             <h3>Credentials</h3>
             <p>
               Official credentials will be posted here once they are confirmed.

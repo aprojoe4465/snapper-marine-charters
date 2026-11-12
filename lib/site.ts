@@ -11,6 +11,7 @@ export const site = {
   serviceAreaShort: "the Port St. Lucie, Stuart, and Fort Pierce area",
   serviceAreaSummary:
     "the Treasure Coast and South Florida — Port St. Lucie, Stuart, and Fort Pierce, including St. Lucie, Martin, Palm Beach, and Broward counties",
+  boatName: "Deep Blue Hunter",
   sisterBrand: {
     name: "Snapper Marine",
     url: "https://snappermarine.com",
@@ -21,7 +22,7 @@ export const site = {
     price: "[Price TBD]",
     duration: "[Duration TBD]",
     marina: "[Marina TBD]",
-    boat: "Contender center console with twin Honda 250 outboards",
+    boat: "Deep Blue Hunter, a Contender center console with twin Honda 250 outboards",
     capacity: "Up to 6 guests",
     license: "[License TBD]",
     uscg: "[USCG credential TBD]",

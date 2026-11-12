@@ -18,7 +18,8 @@ export default function TripsPage() {
           <p>
             Choose a trip type and send a request. Durations, prices, and the
             departure marina are listed as placeholders until we confirm them
-            with you. Trips run on a {site.placeholders.boat}.
+            with you. Trips run aboard {site.boatName}, a Contender center
+            console with twin Honda 250 outboards.
           </p>
         </div>
       </div>
