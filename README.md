@@ -30,12 +30,13 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Environment variables
 
-Booking requests email through Resend, the same path as snappermarine.com (notifications go to `mbarnes@snappermarine.com`).
+Booking requests email through Resend after they pass the site's spam checks.
 
 - `RESEND_API_KEY` — Resend API key
-- `RESEND_FROM` — suggested value: `Snapper Marine Charters <bookings@snappermarine.com>` (use a verified Resend sender; the charters domain can be added later)
-
-Until the new domain is purchased and verified in Resend, keep sending from the existing `bookings@snappermarine.com` address.
+- `RESEND_FROM` — suggested value: `Snapper Marine Charters <bookings@snappermarinecharters.com>` (the sending domain must be verified in Resend)
+- `BOOKING_NOTIFY_TO` — notification inbox; defaults to `jbarnes@snappermarinecharters.com` if unset
+- `BOOKING_ALERT_WEBHOOK_URL` — optional URL that receives a JSON POST of each booking (`name`, `email`, `phone`, `trip`, `date`, `partySize`, `message`, `submittedAt`). Skipped when unset. Failures are logged and do not block the booking or the email.
+- `BOOKING_ALERT_WEBHOOK_AUTH` — optional full `Authorization` header value sent with the webhook request
 
 ## Domain
 

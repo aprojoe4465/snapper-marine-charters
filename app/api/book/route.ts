@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { appendBooking, type BookingRequest } from "@/lib/bookings";
-import { site } from "@/lib/site";
 import { tripTypeOptions } from "@/lib/trips";
 import { clientIp, contentSpamReason, rateLimited, timingProblem } from "@/lib/spam";
 
@@ -87,6 +86,59 @@ function bookingEmailHtml(entry: BookingRequest): string {
 </body></html>`;
 }
 
+const DEFAULT_NOTIFY_TO = "jbarnes@snappermarinecharters.com";
+const DEFAULT_FROM = "Snapper Marine Charters <bookings@snappermarinecharters.com>";
+
+function notifyToAddress(): string {
+  return (process.env.BOOKING_NOTIFY_TO || DEFAULT_NOTIFY_TO).trim();
+}
+
+async function notifyByWebhook(entry: BookingRequest): Promise<void> {
+  const url = (process.env.BOOKING_ALERT_WEBHOOK_URL || "").trim();
+  if (!url) {
+    return;
+  }
+
+  const auth = (process.env.BOOKING_ALERT_WEBHOOK_AUTH || "").trim();
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 5000);
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...(auth ? { Authorization: auth } : {}),
+      },
+      body: JSON.stringify({
+        name: entry.name,
+        email: entry.email,
+        phone: entry.phone,
+        trip: tripLabel(entry.tripType),
+        date: entry.preferredDate || "",
+        partySize: entry.partySize,
+        message: entry.notes || "",
+        submittedAt: entry.createdAt,
+      }),
+      signal: controller.signal,
+    });
+
+    if (!response.ok) {
+      console.error(
+        `[booking] Webhook failed for ${entry.id}: HTTP ${response.status}`
+      );
+    }
+  } catch (error) {
+    const message =
+      error instanceof Error && error.name === "AbortError"
+        ? "timed out after 5s"
+        : describeResendError(error);
+    console.error(`[booking] Webhook failed for ${entry.id}: ${message}`);
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 async function notifyByEmail(entry: BookingRequest): Promise<void> {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
@@ -96,10 +148,10 @@ async function notifyByEmail(entry: BookingRequest): Promise<void> {
 
   try {
     const resend = new Resend(apiKey);
-    const from = process.env.RESEND_FROM || "Snapper Marine Charters <bookings@snappermarine.com>";
+    const from = process.env.RESEND_FROM || DEFAULT_FROM;
     const result = await resend.emails.send({
       from,
-      to: [site.email],
+      to: [notifyToAddress()],
       subject: `New Snapper Marine Charters trip request — ${entry.name}`,
       text: bookingEmailText(entry),
       html: bookingEmailHtml(entry),
@@ -191,6 +243,7 @@ export async function POST(req: Request) {
     });
 
     await notifyByEmail(entry);
+    await notifyByWebhook(entry);
 
     return NextResponse.json({ ok: true, id: entry.id });
   } catch (err) {
