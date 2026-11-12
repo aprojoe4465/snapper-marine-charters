@@ -55,8 +55,7 @@ export default function PrivacyPage() {
           <h2>Contact</h2>
           <p>
             Questions about this policy? Contact {site.name} at{" "}
-            <a href={`mailto:${site.email}`}>{site.email}</a> or{" "}
-            <a href={site.phoneHref}>{site.phoneDisplay}</a>.
+            <a href={`mailto:${site.email}`}>{site.email}</a>.
           </p>
         </div>
       </section>

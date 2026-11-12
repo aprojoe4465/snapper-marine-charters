@@ -4,7 +4,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: `Contact ${site.name} in ${site.city} — call, email, or request a fishing or sightseeing charter online.`,
+  description: `Contact ${site.name} in ${site.city} — email us or request a fishing or sightseeing charter online and we'll get right back with you.`,
 };
 
 export default function ContactPage() {
@@ -14,21 +14,16 @@ export default function ContactPage() {
         <div className="container">
           <span className="eyebrow">Get in touch</span>
           <h1>Contact</h1>
-          <p>Call, email, or send a trip request — we&apos;ll follow up to confirm details.</p>
+          <p>
+            Contact us and we&apos;ll get right back with you — email or send a
+            trip request and we&apos;ll follow up to confirm details.
+          </p>
         </div>
       </div>
 
       <section className="section">
         <div className="container">
           <div className="card-grid">
-            <article className="card">
-              <div className="icon">📞</div>
-              <h3>Phone</h3>
-              <p>
-                <a href={site.phoneHref}>{site.phoneDisplay}</a>
-              </p>
-              <p style={{ marginTop: "0.5rem" }}>Best for same-day questions or a quick check on a date.</p>
-            </article>
             <article className="card">
               <div className="icon">✉</div>
               <h3>Email</h3>
@@ -42,7 +37,10 @@ export default function ContactPage() {
             <article className="card">
               <div className="icon">📋</div>
               <h3>Book online</h3>
-              <p>Tell us the trip type, date, and party size. We&apos;ll confirm the rest.</p>
+              <p>
+                Contact us and we&apos;ll get right back with you. Tell us the
+                trip type, date, and party size — we&apos;ll confirm the rest.
+              </p>
               <Link href="/book" className="btn btn-primary" style={{ marginTop: "1rem" }}>
                 Trip request form
               </Link>

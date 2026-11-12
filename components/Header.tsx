@@ -54,9 +54,9 @@ export default function Header() {
               </Link>
             );
           })}
-          <a href={site.phoneHref} className="phone-pill nav-cta">
-            Call {site.phoneDisplay}
-          </a>
+          <Link href="/book" className="contact-pill nav-cta" onClick={() => setOpen(false)}>
+            Contact us
+          </Link>
         </nav>
       </div>
     </header>

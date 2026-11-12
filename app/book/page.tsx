@@ -18,9 +18,8 @@ export default function BookPage() {
           <h1>Request a trip</h1>
           <p>
             Tell us the trip type, date, and party size. This is a request, not
-            a confirmed reservation — we&apos;ll follow up to confirm
-            availability, price, and the meeting place. Prefer to talk? Call{" "}
-            <a href={site.phoneHref}>{site.phoneDisplay}</a>.
+            a confirmed reservation — contact us and we&apos;ll get right back
+            with you to confirm availability, price, and the meeting place.
           </p>
         </div>
       </div>

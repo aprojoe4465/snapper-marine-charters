@@ -38,9 +38,9 @@ export default function HomePage() {
             <Link href="/book" className="btn btn-primary">
               Book a trip
             </Link>
-            <a href={site.phoneHref} className="btn btn-chrome">
-              Call {site.phoneDisplay}
-            </a>
+            <Link href="/book" className="btn btn-chrome">
+              Contact us and we&apos;ll get right back with you.
+            </Link>
             <Link href="/trips" className="btn btn-ghost">
               View trips
             </Link>
@@ -221,17 +221,18 @@ export default function HomePage() {
           <div className="section-head">
             <h2>Ready to get on the water?</h2>
             <p>
-              Send a trip request or call {site.captainShort}. We&apos;ll confirm
-              the date, price, and meeting details before you go.
+              Send a trip request and we&apos;ll confirm the date, price, and
+              meeting details before you go. Contact us and we&apos;ll get right
+              back with you.
             </p>
           </div>
           <div className="cta-row">
             <Link href="/book" className="btn btn-primary">
               Request a trip
             </Link>
-            <a href={site.phoneHref} className="btn btn-ghost">
-              {site.phoneDisplay}
-            </a>
+            <Link href="/contact" className="btn btn-ghost">
+              Contact us
+            </Link>
           </div>
         </div>
       </section>

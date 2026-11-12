@@ -37,9 +37,9 @@ export default function BookSuccessPage({
             ) : null}
           </p>
           <div className="cta-row" style={{ justifyContent: "center" }}>
-            <a href={site.phoneHref} className="btn btn-primary">
-              Call {site.phoneDisplay}
-            </a>
+            <Link href="/contact" className="btn btn-primary">
+              Contact us and we&apos;ll get right back with you.
+            </Link>
             <Link href="/" className="btn btn-ghost">
               Back to home
             </Link>

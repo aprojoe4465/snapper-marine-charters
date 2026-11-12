@@ -34,8 +34,8 @@ export default function Footer() {
           <div>
             <h4>Contact</h4>
             <div className="footer-links">
-              <a href={site.phoneHref}>{site.phoneDisplay}</a>
               <a href={`mailto:${site.email}`}>{site.email}</a>
+              <Link href="/book">Contact us and we&apos;ll get right back with you.</Link>
               <Link href="/book" className="btn btn-primary" style={{ marginTop: "0.75rem", width: "fit-content" }}>
                 Request a trip
               </Link>

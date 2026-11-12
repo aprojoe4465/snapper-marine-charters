@@ -531,7 +531,7 @@ textarea {
   justify-content: space-between;
 }
 
-.phone-pill {
+.contact-pill {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -544,7 +544,7 @@ textarea {
   font-size: 0.9rem;
 }
 
-.phone-pill:hover {
+.contact-pill:hover {
   color: #fff;
   border-color: var(--blue);
 }

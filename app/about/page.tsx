@@ -71,9 +71,9 @@ export default function AboutPage() {
               <Link href="/book" className="btn btn-primary">
                 Book a trip
               </Link>
-              <a href={site.phoneHref} className="btn btn-chrome">
-                {site.phoneDisplay}
-              </a>
+              <Link href="/book" className="btn btn-chrome">
+                Contact us and we&apos;ll get right back with you.
+              </Link>
             </div>
           </div>
         </div>
