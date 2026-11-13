@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import PhotoGallery from "@/components/PhotoGallery";
 import TripCard from "@/components/TripCard";
-import { galleryPhotos, heroPhoto } from "@/lib/photos";
+import { captainPhoto, galleryPhotos, heroPhoto } from "@/lib/photos";
 import { site } from "@/lib/site";
 import { trips } from "@/lib/trips";
 
@@ -66,7 +66,43 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section section-alt" id="gallery">
+      <section className="section section-alt" id="captain-boat">
+        <div className="container about-grid">
+          <figure className="captain-photo">
+            <Image
+              src={captainPhoto.src}
+              alt={captainPhoto.alt}
+              width={captainPhoto.width}
+              height={captainPhoto.height}
+              sizes="(max-width: 860px) 100vw, 40vw"
+            />
+          </figure>
+          <div className="prose">
+            <span className="eyebrow">The captain and the boat</span>
+            <h2>Meet {site.captainShort} and {site.boatName}</h2>
+            <p>
+              {site.captain} runs {site.name} from {site.city}. Whether you want
+              an inshore or nearshore fishing day, a sandbar outing, a sunset
+              cruise, or time in the water, you&apos;ll work directly with{" "}
+              {site.captainShort} on the plan for your group.
+            </p>
+            <p>
+              Meet {site.boatName}, our Contender center console with twin Honda
+              250 outboards.
+            </p>
+            <div className="cta-row" style={{ marginTop: "1.25rem" }}>
+              <Link href="/about" className="btn btn-ghost">
+                About Captain Joe
+              </Link>
+              <Link href="/book" className="btn btn-primary">
+                Book a Trip
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section" id="gallery">
         <div className="container">
           <div className="section-head">
             <h2>On the water</h2>
@@ -79,7 +115,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section" id="what-to-bring">
+      <section className="section section-alt" id="what-to-bring">
         <div className="container">
           <div className="section-head">
             <h2>What to bring</h2>
@@ -123,7 +159,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section section-alt" id="faq">
+      <section className="section" id="faq">
         <div className="container">
           <div className="section-head">
             <h2>Frequently asked questions</h2>

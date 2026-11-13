@@ -54,8 +54,8 @@ export default function Header() {
               </Link>
             );
           })}
-          <Link href="/book" className="contact-pill nav-cta" onClick={() => setOpen(false)}>
-            Contact us
+          <Link href="/book" className="btn btn-primary nav-cta" onClick={() => setOpen(false)}>
+            Book a Trip
           </Link>
         </nav>
       </div>

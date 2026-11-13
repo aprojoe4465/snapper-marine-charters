@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import StickyBookBar from "@/components/StickyBookBar";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -57,6 +58,7 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        <StickyBookBar />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

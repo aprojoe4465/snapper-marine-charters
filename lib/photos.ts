@@ -8,10 +8,10 @@ export type Photo = {
 
 export const heroPhoto: Photo = {
   id: "hero",
-  src: "/photos/hero-bow-blue-lights-dusk.webp",
+  src: "/photos/sunrise-from-the-bow.webp",
   width: 1600,
   height: 1200,
-  alt: "Blue LED lights in the bow of Deep Blue Hunter, a Contender center console, at dusk on the Intracoastal Waterway",
+  alt: "Sunrise over the ocean from the bow of Deep Blue Hunter",
 };
 
 export const captainPhoto: Photo = {
@@ -46,10 +46,10 @@ export const tripPhotos: Record<string, Photo> = {
   },
   "sunset-cruise": {
     id: "sunset",
-    src: "/photos/sunrise-from-the-bow.webp",
+    src: "/photos/sunrise-from-the-bow-2.webp",
     width: 1600,
     height: 1200,
-    alt: "Sunrise over the ocean from the bow of Deep Blue Hunter",
+    alt: "Sunrise over open water from the bow of Deep Blue Hunter",
   },
   "snorkel-spearfishing": {
     id: "spearfishing",
@@ -62,11 +62,11 @@ export const tripPhotos: Record<string, Photo> = {
 
 export const galleryPhotos: Photo[] = [
   {
-    id: "sunrise-2",
-    src: "/photos/sunrise-from-the-bow-2.webp",
+    id: "bow-blue-lights",
+    src: "/photos/hero-bow-blue-lights-dusk.webp",
     width: 1600,
     height: 1200,
-    alt: "Sunrise over open water from the bow of Deep Blue Hunter",
+    alt: "Blue LED lights in the bow of Deep Blue Hunter, a Contender center console, at dusk on the Intracoastal Waterway",
   },
   {
     id: "spearfisher-stern",
