@@ -8,6 +8,7 @@ export type BookingRequest = {
   phone: string;
   email: string;
   tripType: string;
+  duration: string;
   preferredDate: string;
   partySize: string;
   notes: string;

@@ -37,6 +37,13 @@ export const tripPhotos: Record<string, Photo> = {
     height: 1200,
     alt: "A rainbow over the wake behind twin Honda 250 outboards offshore",
   },
+  "offshore-fishing": {
+    id: "offshore",
+    src: "/photos/gallery-rainbow-over-wake.webp",
+    width: 1600,
+    height: 1200,
+    alt: "A rainbow over the wake behind Deep Blue Hunter offshore",
+  },
   "sightseeing-sandbar": {
     id: "sightseeing",
     src: "/photos/sightseeing-snorkeler-lighthouse.webp",

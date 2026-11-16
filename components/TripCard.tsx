@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { gratuityNote, privateCharterNote } from "@/lib/policies";
 import { tripPhotos } from "@/lib/photos";
 import { tripIcon, type Trip } from "@/lib/trips";
 
 export default function TripCard({ trip, detailed = false }: { trip: Trip; detailed?: boolean }) {
   const photo = tripPhotos[trip.id];
+  const hasRates = Boolean(trip.rates && trip.rates.length);
 
   return (
     <article className="card trip-card" id={trip.id}>
@@ -25,11 +27,22 @@ export default function TripCard({ trip, detailed = false }: { trip: Trip; detai
         <h3>{trip.name}</h3>
         <p>{trip.summary}</p>
         {detailed && <p>{trip.details}</p>}
-        <div className="trip-meta">
-          <span>Duration: {trip.duration}</span>
-          <span>{detailed ? "Price" : "From"}: {trip.price}</span>
-          <span>Capacity: {trip.capacity}</span>
-        </div>
+        {hasRates ? (
+          <ul className="rate-list">
+            {trip.rates!.map((rate) => (
+              <li key={rate.id}>
+                <span>{rate.label}</span>
+                <strong>{rate.price}</strong>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className="trip-meta">
+            <span>Duration: {trip.duration}</span>
+            <span>{detailed ? "Price" : "From"}: {trip.price}</span>
+          </div>
+        )}
+        <p className="charter-note">{privateCharterNote} {gratuityNote}</p>
         {detailed ? (
           <p>
             Meeting place: {trip.marina}
@@ -41,6 +54,7 @@ export default function TripCard({ trip, detailed = false }: { trip: Trip; detai
         ) : (
           <p>
             Departs: {trip.marina}. Boat: {trip.boat}.
+            {trip.category === "fishing" ? ` Included: ${trip.included}` : ""}
           </p>
         )}
         <Link href={`/book?trip=${trip.id}`} className="btn btn-primary">

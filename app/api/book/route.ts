@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { appendBooking, type BookingRequest } from "@/lib/bookings";
-import { tripTypeOptions } from "@/lib/trips";
+import { formatRate, rateById, ratesForTrip, tripTypeOptions } from "@/lib/trips";
 import { clientIp, contentSpamReason, rateLimited, timingProblem } from "@/lib/spam";
 
 export const runtime = "nodejs";
@@ -55,6 +55,19 @@ function tripLabel(id: string): string {
   return tripTypeOptions.find((opt) => opt.value === id)?.label || id;
 }
 
+function durationLabel(tripType: string, durationId: string): string {
+  const rate = rateById(tripType, durationId);
+  return rate ? formatRate(rate) : durationId;
+}
+
+function durationIsValid(tripType: string, duration: string): boolean {
+  const rates = ratesForTrip(tripType);
+  if (rates.length === 0) {
+    return duration === "";
+  }
+  return rates.some((rate) => rate.id === duration);
+}
+
 function bookingEmailText(entry: BookingRequest): string {
   return [
     "New Snapper Marine Charters trip request",
@@ -65,6 +78,7 @@ function bookingEmailText(entry: BookingRequest): string {
     `Phone: ${entry.phone}`,
     `Email: ${entry.email}`,
     `Trip type: ${tripLabel(entry.tripType)}`,
+    `Duration: ${entry.duration ? durationLabel(entry.tripType, entry.duration) : "Not specified"}`,
     `Preferred date: ${entry.preferredDate || "Not specified"}`,
     `Party size: ${entry.partySize}`,
     "",
@@ -80,7 +94,7 @@ function bookingEmailHtml(entry: BookingRequest): string {
 <html><body style="font-family:Arial,sans-serif;color:#1b1b22">
   <h2>New Snapper Marine Charters trip request</h2>
   <p><strong>Booking ID:</strong> ${escapeHtml(entry.id)}</p>
-  <table>${row("Name", entry.name)}${row("Phone", entry.phone)}${row("Email", entry.email)}${row("Trip type", tripLabel(entry.tripType))}${row("Preferred date", entry.preferredDate || "Not specified")}${row("Party size", entry.partySize)}</table>
+  <table>${row("Name", entry.name)}${row("Phone", entry.phone)}${row("Email", entry.email)}${row("Trip type", tripLabel(entry.tripType))}${row("Duration", entry.duration ? durationLabel(entry.tripType, entry.duration) : "Not specified")}${row("Preferred date", entry.preferredDate || "Not specified")}${row("Party size", entry.partySize)}</table>
   <h3>Notes</h3>
   <p>${escapeHtml(entry.notes || "(none)").replace(/\n/g, "<br />")}</p>
 </body></html>`;
@@ -115,6 +129,7 @@ async function notifyByWebhook(entry: BookingRequest): Promise<void> {
         email: entry.email,
         phone: entry.phone,
         trip: tripLabel(entry.tripType),
+        duration: entry.duration ? durationLabel(entry.tripType, entry.duration) : "",
         date: entry.preferredDate || "",
         partySize: entry.partySize,
         message: entry.notes || "",
@@ -201,12 +216,17 @@ export async function POST(req: Request) {
     const phone = required(formValue(form, "phone"), "Phone");
     const email = required(formValue(form, "email"), "Email");
     const tripType = required(formValue(form, "tripType"), "Trip type");
+    const duration = (formValue(form, "duration") || "").trim();
     const preferredDate = required(formValue(form, "preferredDate"), "Preferred date");
     const partySize = required(formValue(form, "partySize"), "Party size");
     const notes = (formValue(form, "notes") || "").trim();
 
     if (!TRIP_TYPES.has(tripType)) {
       return NextResponse.json({ error: "Invalid trip type" }, { status: 400 });
+    }
+
+    if (!durationIsValid(tripType, duration)) {
+      return NextResponse.json({ error: "Please choose a valid duration for that trip" }, { status: 400 });
     }
 
     const party = Number(partySize);
@@ -237,6 +257,7 @@ export async function POST(req: Request) {
       phone,
       email,
       tripType,
+      duration,
       preferredDate,
       partySize: String(party),
       notes,

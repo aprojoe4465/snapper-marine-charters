@@ -2,13 +2,14 @@
 
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { tripTypeOptions } from "@/lib/trips";
+import { formatRate, ratesForTrip, tripTypeOptions } from "@/lib/trips";
 
 type FormState = {
   name: string;
   phone: string;
   email: string;
   tripType: string;
+  duration: string;
   preferredDate: string;
   partySize: string;
   notes: string;
@@ -19,6 +20,7 @@ const initial: FormState = {
   phone: "",
   email: "",
   tripType: "",
+  duration: "",
   preferredDate: "",
   partySize: "",
   notes: "",
@@ -42,8 +44,16 @@ export default function BookingForm() {
   }, []);
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
-    setForm((prev) => ({ ...prev, [key]: value }));
+    setForm((prev) => {
+      if (key === "tripType") {
+        return { ...prev, tripType: value as FormState["tripType"], duration: "" };
+      }
+      return { ...prev, [key]: value };
+    });
   }
+
+  const durationOptions = ratesForTrip(form.tripType);
+  const needsDuration = durationOptions.length > 0;
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -136,6 +146,32 @@ export default function BookingForm() {
           ))}
         </select>
       </label>
+
+      {needsDuration ? (
+        <label>
+          Duration *
+          <select
+            required
+            name="duration"
+            value={form.duration}
+            onChange={(e) => update("duration", e.target.value)}
+          >
+            <option value="" disabled>
+              Select a duration
+            </option>
+            {durationOptions.map((rate) => (
+              <option key={rate.id} value={rate.id}>
+                {formatRate(rate)}
+              </option>
+            ))}
+          </select>
+        </label>
+      ) : form.tripType === "snorkel-spearfishing" ? (
+        <p className="form-hint">
+          Duration and price for snorkel and spearfishing trips are still [Duration TBD] / [Price TBD].
+          Tell us what you have in mind in the notes and we&apos;ll follow up.
+        </p>
+      ) : null}
 
       <div className="form-row two">
         <label>

@@ -28,6 +28,7 @@ export const site = {
     uscg: "[USCG credential TBD]",
     included: "[Included items TBD]",
     whatToBring: "[What to bring TBD]",
+    cancellation: "[Cancellation policy TBD]",
   },
 } as const;
 

@@ -3,6 +3,7 @@ import Link from "next/link";
 import PhotoGallery from "@/components/PhotoGallery";
 import TripCard from "@/components/TripCard";
 import { captainPhoto, galleryPhotos, heroPhoto } from "@/lib/photos";
+import { fishingIncluded, gratuityNote, privateCharterNote, weatherPolicy } from "@/lib/policies";
 import { site } from "@/lib/site";
 import { trips } from "@/lib/trips";
 
@@ -134,12 +135,10 @@ export default function HomePage() {
               </p>
             </article>
             <article className="card">
-              <h3>We&apos;ll confirm</h3>
+              <h3>Fishing trips include</h3>
               <p>
-                What the boat provides — including gear, bait, ice, food, or
-                drinks — is still {site.placeholders.included}. Florida fishing
-                license rules can depend on the trip; we&apos;ll tell you what you
-                need, if anything, before you go.
+                {fishingIncluded} {gratuityNote} Other inclusions, such as food
+                or drinks, are still {site.placeholders.included}.
               </p>
             </article>
             <article className="card">
@@ -177,16 +176,22 @@ export default function HomePage() {
             <details>
               <summary>How many people can come?</summary>
               <p>
-                Trips take up to 6 passengers. Tell us your group size on the
+                {privateCharterNote} Tell us your group size on the
                 request form and we&apos;ll confirm whether the date works.
               </p>
             </details>
             <details>
               <summary>What does a trip cost?</summary>
               <p>
-                Rates are {site.placeholders.price}. This site takes requests only —
-                we&apos;ll follow up with a firm price, duration ({site.placeholders.duration}),
-                and what&apos;s included before anything is booked.
+                {privateCharterNote} Offshore fishing is $900 for a half day
+                (4 hours), $1,200 for a 3/4 day (6 hours), and $1,450 for a full
+                day (8 hours). Inshore and nearshore fishing are $750 for 4
+                hours, $950 for 6 hours, and $1,150 for 8 hours. A sunset cruise
+                is $450 for 2 hours. Sandbar or sightseeing trips are $600 for 3
+                hours or $700 for a 4-hour cruise. Fishing trips include{" "}
+                {fishingIncluded.toLowerCase()} {gratuityNote} Snorkel and
+                spearfishing rates are still {site.placeholders.price} /{" "}
+                {site.placeholders.duration}.
               </p>
             </details>
             <details>
@@ -216,9 +221,8 @@ export default function HomePage() {
             <details>
               <summary>What if the weather is bad?</summary>
               <p>
-                Safety comes first. If conditions aren&apos;t right, we&apos;ll contact
-                you to reschedule. There is no cancellation-fee policy posted yet;
-                we&apos;ll go over it when we confirm your trip.
+                {weatherPolicy} The standard cancellation policy, including any
+                deposit or cancellation window, is still {site.placeholders.cancellation}.
               </p>
             </details>
             <details>

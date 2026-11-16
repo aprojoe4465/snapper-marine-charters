@@ -8,15 +8,15 @@ This is a sister brand of [Snapper Marine](https://snappermarine.com). The site 
 
 Do not invent these on the site. Edit `lib/site.ts` (`placeholders`) and `lib/trips.ts`:
 
-- `[Price TBD]`
-- `[Duration TBD]`
+- Fishing and sightseeing rates and durations are set in `lib/trips.ts` (private boat rates, up to 6 guests). Snorkel & spearfishing is still `[Price TBD]` / `[Duration TBD]`.
 - `[Marina TBD]`
 - Boat is set: Deep Blue Hunter, a Contender center console with twin Honda 250 outboards
 - Capacity is set: Up to 6 guests
 - `[License TBD]`
 - `[USCG credential TBD]`
-- `[Included items TBD]`
+- Fishing trips include bait, tackle, fishing licenses, ice, and fish cleaning. Other inclusions may still be `[Included items TBD]`. Crew gratuity is not included.
 - `[What to bring TBD]`
+- Weather policy is posted. The standard cancellation policy, including any deposit or cancellation window, is still `[Cancellation policy TBD]`.
 
 ## Local development
 
